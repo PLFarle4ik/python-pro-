@@ -1,14 +1,90 @@
-slang = {
-    "КРИНЖ": "Что-то очень странное или стыдное",
-    "ЛОЛ": "Что-то смешное",
-    "РЖАКА": "Что-то очень смешное",
-    "ливнуть": "уйти",
-    "нафармить": "накопить или заработать",
+import telebot
+import random
 
-}
-while True:    
-    word = input("Введите непонятное слово")
-    if word in slang.keys():
-        print(slang[word])
-    else:
-        print('Такого слова нет')
+bot = telebot.TeleBot("7511298913:AAE94AYNL6SmTJUzFCFAcesCAK5bThtzYMY")
+
+@bot.message_handler(commands=['start'])
+def send_welcome(message):
+    bot.reply_to(message, "Привет! Я твой Telegram бот. Напиши что-нибудь!")
+
+@bot.message_handler(commands=['hello'])
+def send_hello(message):
+    bot.reply_to(message, "Привет! Как дела?")
+
+@bot.message_handler(commands=['heh'])
+def send_heh(message):
+    count_heh = int(message.text.split()[1]) if len(message.text.split()) > 1 else 5
+    bot.reply_to(message, "he" * count_heh)
+
+@bot.message_handler(commands=['bye'])
+def send_bye(message):
+    bot.reply_to(message, "Пока! Удачи!")
+
+@bot.message_handler(commands=['calc'])
+def calculator(message):
+    try:
+        parts = message.text.split()
+        if len(parts) != 4:
+            bot.reply_to(message, "Используй формат: /calc число оператор число")
+            return
+        num1 = float(parts[1])
+        op = parts[2]
+        num2 = float(parts[3])
+        result = None
+        if op == '+':
+            result = num1 + num2
+        elif op == '-':
+            result = num1 - num2
+        elif op == '*':
+            result = num1 * num2
+        elif op == '/':
+            if num2 == 0:
+                bot.reply_to(message, "Ошибка: деление на 0")
+                return
+            result = num1 / num2
+        else:
+            bot.reply_to(message, "Оператор может быть +, -, *, /")
+            return
+
+        bot.reply_to(message, f"Результат: {result}")
+    except ValueError:
+        bot.reply_to(message, "Ошибка! Введите числа корректно.")
+
+@bot.message_handler(commands=['random'])
+def send_random(message):
+    number = random.randint(1, 100)
+    bot.reply_to(message, f"Твое случайное число: {number}")
+
+@bot.message_handler(commands=['repeat'])
+def repeat_msg(message):
+    parts = message.text.split(maxsplit=2)
+    if len(parts) < 3 or not parts[1].isdigit():
+        bot.reply_to(message, "Используй /repeat число сообщение")
+        return
+    count = int(parts[1])
+    text = parts[2]
+    bot.reply_to(message, text * count)
+
+@bot.message_handler(commands=['info'])
+def send_info(message):
+    info_text = (
+        "Я простой Telegram бот для демонстрации команд.\n"
+        "Команды:\n"
+        "/calc — калькулятор (+, -, *, /)\n"
+        "/random — случайное число от 1 до 100\n"
+        "/repeat — повторить сообщение несколько раз\n"
+        "/info — информация обо мне\n"
+    )
+    bot.reply_to(message, info_text)
+
+@bot.message_handler(func=lambda message: True)
+def send_reaction(message):
+    emo = ["\U0001F525", "\U0001F917", "\U0001F60E"]  # or use ["🔥", "🤗", "😎"]
+    bot.set_message_reaction(message.chat.id, message.id, [ReactionTypeEmoji(random.choice(emo))], is_big=False)
+
+@bot.message_handler(func=lambda message: True)
+def echo_all(message):
+    bot.reply_to(message, message.text)
+
+print('Бот запущен')
+bot.polling()
