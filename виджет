@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>это простоь ужас</title>
+</head>
+<body>
+    <h1> </h1>
+    <p>Это мой сайт</p>
+    <img src="https://i.pinimg.com/originals/35/5e/98/355e982823f83d0c0730249488e75017.jpg?nii=t" alt="телефон">
+
+    <h2>текст</h2>
+    <p>ПРОСТО ТЕКСТ:3</p>
+    <img src="" alt="Капибара на травке">
+
+    <h3>2 факт</h3>
+    <P>текст</P>
+    <img src="" alt="Капибара на травке">
+
+    <h4>текст</h4>
+    <p>тут нечего нет(((</p>
+    <img src="" alt="Капибара на травке">
+    <iframe src="https://www.meteoblue.com/en/weather/widget/daily/?geoloc=detect&tempunit=CELSIUS&windunit=METER_PER_SECOND&precipunit=MILLIMETER&days=7&coloured=coloured&pictoicon=1&maxtemperature=1&mintemperature=1&windspeed=1&windgust=1&winddirection=1&uv=0&humidity=1&precipitation=1&precipitationprobability=1&spot=1&pressure=0&layout=light&user_key=3d76b5452ebdbae9&embed_key=dab85ee82fbbe73c&sig=9e4c9b17f20bd0149ee61e50f2306413fa5f55ea653f11eb903f74e31970b306" frameborder="0" scrolling="NO" allowtransparency="true" sandbox="allow-same-origin allow-scripts allow-popups allow-popups-to-escape-sandbox" style="width: 378px;height: 393px;border: 0;overflow: hidden;"></iframe><div><!-- DO NOT REMOVE THIS LINK --><a href="https://www.meteoblue.com/en/weather/week/index" target="_blank" rel="noopener">meteoblue</a></div>
+</body>
+</html>
