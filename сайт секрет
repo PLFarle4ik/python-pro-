@@ -1,0 +1,18 @@
+from flask import Flask
+import random
+
+random_words = ['орел','решка','тайное послание я люблю пелмени:3','да']
+
+
+app = Flask(__name__)
+
+@app.route("/")
+def hello_world():
+    return "<p>Привет, мир!</p>"
+
+@app.route("/secret")
+def secret():
+    return f'<p>{random.choice(random_words)}</p>'
+
+
+app.run(debug=True)
